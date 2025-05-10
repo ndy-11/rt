@@ -1,0 +1,1 @@
+<?php /**PATH /media/sandy/01D8523B2AAE3E401/Rest In Peace/Project/sirt-web/resources/views/layouts/404.blade.php ENDPATH**/ ?>
