@@ -35,7 +35,7 @@ RW - Detail Penduduk
                         <div class="w-100"></div>
                         <h3 class="text-dark">{{$warga->nama}} ({{$warga->jkel}})</h3>
                     </div>
-                   <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                   <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                         <label for="">Nomor Induk Penduduk</label>
                         <div class="w-100"></div>
                         <h3 class="text-dark">{{$warga->nik}}</h3>
@@ -44,7 +44,7 @@ RW - Detail Penduduk
                         <label for="">Nomor Kartu Keluarga</label>
                         <div class="w-100"></div>
                         <h3 class="text-dark">{{$warga->no_kk}}</h3>
-                    </div> -->
+                    </div>
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                         <label for="">RT</label>
                         <div class="w-100"></div>
@@ -83,7 +83,7 @@ RW - Detail Penduduk
                         <div class="w-100"></div>
                         <h5 class="text-dark">{{$warga->tgl_lahir}}</h5>
                     </div>
-                  <!--  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                         <label for="">Agama</label>
                         <div class="w-100"></div>
                         <h5 class="text-dark">{{$warga->agama}}</h5>
@@ -98,7 +98,7 @@ RW - Detail Penduduk
                         <label for="">Pekerjaan</label>
                         <div class="w-100"></div>
                         <h5 class="text-dark">{{$warga->pekerjaan}}</h5>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>

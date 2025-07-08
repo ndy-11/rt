@@ -222,6 +222,10 @@ RT - Inventaris
 <script src="{{asset('assets/plugins/data-tables/datatables.responsive.min.js')}}"></script>
 <script>
     $(document).ready(function() {
+        // Cegah duplikasi inisialisasi DataTable
+        if ($.fn.DataTable.isDataTable('.data-table')) {
+            $('.data-table').DataTable().destroy();
+        }
         $('.data-table').DataTable({
             "responsive": true,
             "aLengthMenu": [

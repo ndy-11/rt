@@ -11,6 +11,9 @@ Route::get('/', function() {
     return redirect('/rt/dashboard');
 });
 Route::resource('dashboard', 'RT\DashboardController');
+Route::resource('grafik', 'RT\GrafikController');
+Route::resource('tambah_warga', 'RT\TambahController');
+Route::resource('master-data', 'RT\MasterController');
 Route::resource('penduduk', 'RT\PendudukController');
 Route::resource('inventaris', 'RT\InventarisController');
 Route::resource('tamu-kunjungan', 'RT\TamuController');

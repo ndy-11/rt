@@ -131,37 +131,25 @@ RW - Register
 <script src="{{asset('assets/plugins/data-tables/datatables.responsive.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-        $('.data-table').DataTable({
-            "responsive": true,
-            "aLengthMenu": [
-                [20, 30, 50, 75, -1],
-                [20, 30, 50, 75, "All"]
-            ],
-            "pageLength": 20,
-            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-            "columnDefs": [{
-                "targets": 'no-sort',
-                "orderable": false,
-            }]
+        // Cegah duplikasi inisialisasi DataTable pada semua tabel .data-table
+        $('.data-table').each(function() {
+            if ($.fn.DataTable.isDataTable(this)) {
+                $(this).DataTable().destroy();
+            }
+            $(this).DataTable({
+                "responsive": true,
+                "aLengthMenu": [
+                    [20, 30, 50, 75, -1],
+                    [20, 30, 50, 75, "All"]
+                ],
+                "pageLength": 20,
+                "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
         });
     });
-
-    // $('#keluar_register').change(function() {
-    //     if ($(this).attr('checked', true)) {
-    //         $('#masuk_register_label').addClass('outlined')
-    //         $('#keluar_register_label').removeClass('outlined')
-    //         $('#keluar_register_card').removeClass('d-none');
-    //         $('#masuk_register_card').addClass('d-none');
-    //     }
-    // });
-
-    // $('#masuk_register').change(function() {
-    //     if ($(this).attr('checked', true)) {
-    //         $('#keluar_register_label').addClass('outlined')
-    //         $('#masuk_register_label').removeClass('outlined')
-    //         $('#masuk_register_card').removeClass('d-none');
-    //         $('#keluar_register_card').addClass('d-none');
-    //     }
-    // });
 </script>
 @endpush

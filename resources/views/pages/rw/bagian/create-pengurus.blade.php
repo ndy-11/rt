@@ -47,19 +47,25 @@ RT - Tambah Pengurus
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($user as $val)
-                                <tr>
-                                    <td>
-                                        <label class="control outlined control-checkbox checkbox-primary">
-                                            <input name="id_warga[]" type="checkbox" value="{{$val->id}}" />
-                                            <div class="control-indicator"></div>
-                                        </label>
-                                    </td>
-                                    <td>{{$val->warga->nama}}</td>
-                                    <td>{{$val->warga->jkel}}</td>
-                                    <td>{{$val->warga->alamat}}</td>
-                                </tr>
-                                @endforeach
+                                @forelse($user as $val)
+                                    @if($val->warga)
+                                    <tr>
+                                        <td>
+                                            <label class="control outlined control-checkbox checkbox-primary">
+                                                <input name="id_warga[]" type="checkbox" value="{{$val->id}}" />
+                                                <div class="control-indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>{{ $val->warga->nama }}</td>
+                                        <td>{{ $val->warga->jkel }}</td>
+                                        <td>{{ $val->warga->alamat }}</td>
+                                    </tr>
+                                    @endif
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center">Tidak ada warga yang tersedia untuk dipilih.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

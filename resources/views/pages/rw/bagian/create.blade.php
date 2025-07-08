@@ -77,7 +77,7 @@
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4">
                                 <label>NIK (Nomor Induk Penduduk)</label>
                                 <input type="text" class="form-control" name="nik" id="inputNIK"
-                                       placeholder="Masukan NIK" required value="{{old('nik')}}">
+                                       placeholder="Masukan NIK" required minlength="16" maxlength="16" value="{{old('nik')}}">
                                 <div class="valid-feedback">
                                     Bagus! NIK tersedia
                                 </div>
@@ -88,13 +88,9 @@
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4">
                                 <label>No. KK</label>
                                 <input type="text" class="form-control" name="no_kk" id="inputNoKK"
-                                       placeholder="Masukan Nomor KK" required value="{{old('no_kk')}}">
-                                <div class="valid-feedback">
-
-                                </div>
-                                <div class="invalid-feedback">
-
-                                </div>
+                                       placeholder="Masukan Nomor KK" required minlength="16" maxlength="16" value="{{old('no_kk')}}">
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="w-100"></div>
                             <div class="form-row col-lg-4 col-md-4 col-sm-12 mb-4">
@@ -109,13 +105,13 @@
                                 <ul class="list-unstyled list-inline">
                                     <li class="d-inline-block mr-3">
                                         <label class="control control-radio">Laki Laki
-                                            <input type="radio" name="jkel" checked="checked" value="L"/>
+                                            <input type="radio" name="jkel" value="L" {{ old('jkel', 'L') == 'L' ? 'checked' : '' }}/>
                                             <div class="control-indicator"></div>
                                         </label>
                                     </li>
                                     <li class="d-inline-block mr-3">
                                         <label class="control control-radio">Perempuan
-                                            <input type="radio" name="jkel" value="P"/>
+                                            <input type="radio" name="jkel" value="P" {{ old('jkel') == 'P' ? 'checked' : '' }}/>
                                             <div class="control-indicator"></div>
                                         </label>
                                     </li>
@@ -128,13 +124,13 @@
                                 <ul class="list-unstyled list-inline">
                                     <li class="d-inline-block mr-3">
                                         <label class="control control-radio">Belum
-                                            <input type="radio" name="status_kawin" checked="checked" value="Belum"/>
+                                            <input type="radio" name="status_kawin" value="Belum" {{ old('status_kawin', 'Belum') == 'Belum' ? 'checked' : '' }}/>
                                             <div class="control-indicator"></div>
                                         </label>
                                     </li>
                                     <li class="d-inline-block mr-3">
                                         <label class="control control-radio">Sudah
-                                            <input type="radio" name="status_kawin" value="Sudah"/>
+                                            <input type="radio" name="status_kawin" value="Sudah" {{ old('status_kawin') == 'Sudah' ? 'checked' : '' }}/>
                                             <div class="control-indicator"></div>
                                         </label>
                                     </li>
@@ -144,34 +140,34 @@
                             <div class="form-row col-lg-4 col-md-6 col-sm-12 mb-4">
                                 <label>Agama</label>
                                 <select class="form-control" name="agama">
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Katolik">Katolik</option>
-                                    <option value="Hindu">Hindu</option>
-                                    <option value="Buddha">Buddha</option>
+                                    <option value="Islam" {{ old('agama') == 'Islam' ? 'selected' : '' }}>Islam</option>
+                                    <option value="Kristen" {{ old('agama') == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                                    <option value="Katolik" {{ old('agama') == 'Katolik' ? 'selected' : '' }}>Katolik</option>
+                                    <option value="Hindu" {{ old('agama') == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                                    <option value="Buddha" {{ old('agama') == 'Buddha' ? 'selected' : '' }}>Buddha</option>
                                 </select>
                             </div>
                             <div class="w-100"></div>
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4">
                                 <label>Pendidikan</label>
                                 <select class="form-control" name="pendidikan">
-                                    <option value="SD">SD</option>
-                                    <option value="SMP">SMP</option>
-                                    <option value="SMA">SMA</option>
-                                    <option value="Diploma 1">Diploma 1</option>
-                                    <option value="Diploma 2">Diploma 2</option>
-                                    <option value="Diploma 3">Diploma 3</option>
-                                    <option value="Diploma 4">Diploma 4</option>
-                                    <option value="Strata 1">Strata 1</option>
-                                    <option value="Strata 2">Strata 2</option>
-                                    <option value="Strata 3">Strata 3</option>
-                                    <option value="Strata 4">Strata 4</option>
-                                    <option value="Lainnya">Lainnya</option>
+                                    <option value="SD" {{ old('pendidikan') == 'SD' ? 'selected' : '' }}>SD</option>
+                                    <option value="SMP" {{ old('pendidikan') == 'SMP' ? 'selected' : '' }}>SMP</option>
+                                    <option value="SMA" {{ old('pendidikan') == 'SMA' ? 'selected' : '' }}>SMA</option>
+                                    <option value="Diploma 1" {{ old('pendidikan') == 'Diploma 1' ? 'selected' : '' }}>Diploma 1</option>
+                                    <option value="Diploma 2" {{ old('pendidikan') == 'Diploma 2' ? 'selected' : '' }}>Diploma 2</option>
+                                    <option value="Diploma 3" {{ old('pendidikan') == 'Diploma 3' ? 'selected' : '' }}>Diploma 3</option>
+                                    <option value="Diploma 4" {{ old('pendidikan') == 'Diploma 4' ? 'selected' : '' }}>Diploma 4</option>
+                                    <option value="Strata 1" {{ old('pendidikan') == 'Strata 1' ? 'selected' : '' }}>Strata 1</option>
+                                    <option value="Strata 2" {{ old('pendidikan') == 'Strata 2' ? 'selected' : '' }}>Strata 2</option>
+                                    <option value="Strata 3" {{ old('pendidikan') == 'Strata 3' ? 'selected' : '' }}>Strata 3</option>
+                                    <option value="Strata 4" {{ old('pendidikan') == 'Strata 4' ? 'selected' : '' }}>Strata 4</option>
+                                    <option value="Lainnya" {{ old('pendidikan') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                                 </select>
                             </div>
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4">
                                 <label>Pekerjaan</label>
-                                <input class="form-control" name="pekerjaan" required placeholder="Masukan Pekerjaan">
+                                <input class="form-control" name="pekerjaan" required placeholder="Masukan Pekerjaan" value="{{ old('pekerjaan') }}">
                             </div>
                             <div class="w-100"></div>
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4">
@@ -180,13 +176,13 @@
                                 <ul class="list-unstyled list-inline">
                                     <li class="d-inline-block mr-3">
                                         <label class="control control-radio">WNI
-                                            <input type="radio" name="kewarganegaraan" checked="checked" value="WNI"/>
+                                            <input type="radio" name="kewarganegaraan" value="WNI" {{ old('kewarganegaraan', 'WNI') == 'WNI' ? 'checked' : '' }}/>
                                             <div class="control-indicator"></div>
                                         </label>
                                     </li>
                                     <li class="d-inline-block mr-3">
                                         <label class="control control-radio">WNA
-                                            <input type="radio" name="kewarganegaraan" value="WNA"/>
+                                            <input type="radio" name="kewarganegaraan" value="WNA" {{ old('kewarganegaraan') == 'WNA' ? 'checked' : '' }}/>
                                             <div class="control-indicator"></div>
                                         </label>
                                     </li>
@@ -199,14 +195,13 @@
                                 <ul class="list-unstyled list-inline">
                                     <li class="d-inline-block mr-3">
                                         <label class="control control-radio">Kepala Keluarga
-                                            <input type="radio" name="kedudukan_keluarga" checked="checked"
-                                                   value="Kepala"/>
+                                            <input type="radio" name="kedudukan_keluarga" value="Kepala" {{ old('kedudukan_keluarga', 'Kepala') == 'Kepala' ? 'checked' : '' }}/>
                                             <div class="control-indicator"></div>
                                         </label>
                                     </li>
                                     <li class="d-inline-block mr-3">
                                         <label class="control control-radio">Anggota Keluarga
-                                            <input type="radio" name="kedudukan_keluarga" value="Anggota"/>
+                                            <input type="radio" name="kedudukan_keluarga" value="Anggota" {{ old('kedudukan_keluarga') == 'Anggota' ? 'checked' : '' }}/>
                                             <div class="control-indicator"></div>
                                         </label>
                                     </li>
@@ -220,37 +215,37 @@
                                 <label>Provinsi</label>
                                 <div class="w-100"></div>
                                 <div class="select2-wrapper w-100">
-                                    <select id="provinsi-ktp" class="form-control select2-prov">
+                                    <select id="provinsi-ktp" class="form-control select2-prov" name="prov_ktp" required>
+                                        <option value="">Pilih Provinsi</option>
+                                        {{-- Data akan diisi oleh JS --}}
                                     </select>
-                                    <input type="hidden" name="prov_ktp">
                                 </div>
                             </div>
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4">
                                 <label>Kota / Kabupaten</label>
                                 <div class="w-100"></div>
                                 <div class="select2-wrapper w-100">
-                                    <select id="kota-ktp" class="form-control select2-kot">
+                                    <select id="kota-ktp" class="form-control select2-kot" name="kota_ktp" required>
+                                        <option value="">Pilih Kota/Kabupaten</option>
                                     </select>
-                                    <input type="hidden" name="kota_ktp">
                                 </div>
                             </div>
-                            <div class="w-100"></div>
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4">
                                 <label>Kecamatan</label>
                                 <div class="w-100"></div>
                                 <div class="select2-wrapper w-100">
-                                    <select id="kec-ktp" class="form-control select2-kec">
+                                    <select id="kec-ktp" class="form-control select2-kec" name="kec_ktp" required>
+                                        <option value="">Pilih Kecamatan</option>
                                     </select>
-                                    <input type="hidden" name="kec_ktp">
                                 </div>
                             </div>
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4">
                                 <label>Kelurahan / Desa</label>
                                 <div class="w-100"></div>
                                 <div class="select2-wrapper w-100">
-                                    <select id="kel-ktp" class="form-control select2-kel">
+                                    <select id="kel-ktp" class="form-control select2-kel" name="kel_ktp" required>
+                                        <option value="">Pilih Kelurahan/Desa</option>
                                     </select>
-                                    <input type="hidden" name="kel_ktp">
                                 </div>
                             </div>
                             <div class="w-100"></div>
@@ -279,37 +274,37 @@
                                 <label>Provinsi</label>
                                 <div class="w-100"></div>
                                 <div class="select2-wrapper w-100">
-                                    <select id="provinsi-tinggal" class="form-control select2-prov">
+                                    <select id="provinsi-tinggal" class="form-control select2-prov" name="prov_tinggal">
+                                        <option value="">Pilih Provinsi</option>
+                                        {{-- Data akan diisi oleh JS --}}
                                     </select>
-                                    <input type="hidden" name="prov_tinggal">
                                 </div>
                             </div>
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4 tinggal">
                                 <label>Kota / Kabupaten</label>
                                 <div class="w-100"></div>
                                 <div class="select2-wrapper w-100">
-                                    <select id="kota-tinggal" class="form-control select2-kot">
+                                    <select id="kota-tinggal" class="form-control select2-kot" name="kota_tinggal">
+                                        <option value="">Pilih Kota/Kabupaten</option>
                                     </select>
-                                    <input type="hidden" name="kota_tinggal">
                                 </div>
                             </div>
-                            <div class="w-100"></div>
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4 tinggal">
                                 <label>Kecamatan</label>
                                 <div class="w-100"></div>
                                 <div class="select2-wrapper w-100">
-                                    <select id="kec-tinggal" class="form-control select2-kec">
+                                    <select id="kec-tinggal" class="form-control select2-kec" name="kec_tinggal">
+                                        <option value="">Pilih Kecamatan</option>
                                     </select>
-                                    <input type="hidden" name="kec_tinggal">
                                 </div>
                             </div>
                             <div class="form-row col-lg-6 col-md-6 col-sm-12 mb-4 tinggal">
                                 <label>Kelurahan / Desa</label>
                                 <div class="w-100"></div>
                                 <div class="select2-wrapper w-100">
-                                    <select id="kel-tinggal" class="form-control select2-kel">
+                                    <select id="kel-tinggal" class="form-control select2-kel" name="kel_tinggal">
+                                        <option value="">Pilih Kelurahan/Desa</option>
                                     </select>
-                                    <input type="hidden" name="kel_tinggal">
                                 </div>
                             </div>
                             <div class="w-100"></div>
@@ -372,11 +367,31 @@
                 maximumSelectionSize: 6,
             });
 
+            // Saat load, nonaktifkan required pada field alamat tinggal jika hidden
+            function toggleTinggalRequired(isRequired) {
+                $('#provinsi-tinggal').prop('required', isRequired);
+                $('#kota-tinggal').prop('required', isRequired);
+                $('#kec-tinggal').prop('required', isRequired);
+                $('#kel-tinggal').prop('required', isRequired);
+                $('textarea[name="alamat_tinggal"]').prop('required', isRequired);
+            }
+
+            // Inisialisasi: jika checked, hilangkan required
+            if ($('#alamat-sama').is(':checked')) {
+                $('.tinggal').addClass('d-none');
+                toggleTinggalRequired(false);
+            } else {
+                $('.tinggal').removeClass('d-none');
+                toggleTinggalRequired(true);
+            }
+
             $('#alamat-sama').change(function () {
                 if ($(this).is(":checked")) {
                     $('.tinggal').addClass('d-none');
+                    toggleTinggalRequired(false);
                 } else {
                     $('.tinggal').removeClass('d-none');
+                    toggleTinggalRequired(true);
                 }
             });
 
@@ -391,68 +406,56 @@
                 alamat: '',
             };
 
-            $.ajax({
-                type: 'GET',
-                url: 'https://dev.farizdotid.com/api/daerahindonesia/provinsi',
-                success: function (data) {
-                    $('#provinsi-ktp').empty();
-                    data = data.provinsi;
-                    for (let i = 0; i < data.length; i++) {
-                        $('#provinsi-ktp').append('<option value=' + data[i].id + '>' + data[i].nama + '</option>');
-                    }
-                }
+            $.get('/get-provinsi', function(data) {
+                $('#provinsi-ktp').empty().append('<option value="">Pilih Provinsi</option>');
+                data.forEach(function(item) {
+                    $('#provinsi-ktp').append('<option value="' + item.id + '">' + item.nama + '</option>');
+                });
             });
 
             $('#provinsi-ktp').change(function () {
-                alamatKtp.idProvinsi = $(this).find(":selected").val();
-                $('input[name ="prov_ktp"]').val($(this).find(":selected").text());
-                $.ajax({
-                    type: 'GET',
-                    url: 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' + alamatKtp.idProvinsi,
-                    success: function (data) {
-                        $('#kota-ktp').empty();
-                        data = data.kota_kabupaten;
-                        for (let i = 0; i < data.length; i++) {
-                            $('#kota-ktp').append('<option value=' + data[i].id + '>' + data[i].nama + '</option>');
-                        }
-                    }
-                });
+                let provinsiId = $(this).val();
+                $('#kota-ktp').empty().append('<option value="">Pilih Kota/Kabupaten</option>');
+                $('#kec-ktp').empty().append('<option value="">Pilih Kecamatan</option>');
+                $('#kel-ktp').empty().append('<option value="">Pilih Kelurahan/Desa</option>');
+                if(provinsiId) {
+                    $.get('/get-kota/' + provinsiId, function(data) {
+                        let html = '<option value="">Pilih Kota/Kabupaten</option>';
+                        data.forEach(function(item) {
+                            html += '<option value="' + item.id + '">' + item.nama + '</option>';
+                        });
+                        $('#kota-ktp').html(html);
+                    });
+                }
             });
 
             $('#kota-ktp').change(function () {
-                alamatKtp.idKota = $(this).find(":selected").val();
-                $('input[name ="kota_ktp"]').val($(this).find(":selected").text());
-                $.ajax({
-                    type: 'GET',
-                    url: 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=' + alamatKtp.idKota,
-                    success: function (data) {
-                        $('#kec-ktp').empty();
-                        data = data.kecamatan;
-                        for (let i = 0; i < data.length; i++) {
-                            $('#kec-ktp').append('<option value=' + data[i].id + '>' + data[i].nama + '</option>');
-                        }
-                    }
-                });
+                let kotaId = $(this).val();
+                $('#kec-ktp').empty().append('<option value="">Pilih Kecamatan</option>');
+                $('#kel-ktp').empty().append('<option value="">Pilih Kelurahan/Desa</option>');
+                if(kotaId) {
+                    $.get('/get-kecamatan/' + kotaId, function(data) {
+                        let html = '<option value="">Pilih Kecamatan</option>';
+                        data.forEach(function(item) {
+                            html += '<option value="' + item.id + '">' + item.nama + '</option>';
+                        });
+                        $('#kec-ktp').html(html);
+                    });
+                }
             });
 
             $('#kec-ktp').change(function () {
-                alamatKtp.idKec = $(this).find(":selected").val();
-                $('input[name ="kec_ktp"]').val($(this).find(":selected").text());
-                $.ajax({
-                    type: 'GET',
-                    url: 'https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=' + alamatKtp.idKec,
-                    success: function (data) {
-                        $('#kel-ktp').empty();
-                        data = data.kelurahan;
-                        for (let i = 0; i < data.length; i++) {
-                            $('#kel-ktp').append('<option value=' + data[i].id + '>' + data[i].nama + '</option>');
-                        }
-                    }
-                });
-            });
-
-            $('#kel-ktp').change(function () {
-                $('input[name ="kel_ktp"]').val($(this).find(":selected").text());
+                let kecamatanId = $(this).val();
+                $('#kel-ktp').empty().append('<option value="">Pilih Kelurahan/Desa</option>');
+                if(kecamatanId) {
+                    $.get('/get-kelurahan/' + kecamatanId, function(data) {
+                        let html = '<option value="">Pilih Kelurahan/Desa</option>';
+                        data.forEach(function(item) {
+                            html += '<option value="' + item.id + '">' + item.nama + '</option>';
+                        });
+                        $('#kel-ktp').html(html);
+                    });
+                }
             });
 
 
@@ -464,70 +467,57 @@
                 alamat: '',
             };
 
-            $.ajax({
-                type: 'GET',
-                url: 'https://dev.farizdotid.com/api/daerahindonesia/provinsi',
-                success: function (data) {
-                    $('#provinsi-tinggal').empty();
-                    data = data.provinsi;
-                    for (let i = 0; i < data.length; i++) {
-                        $('#provinsi-tinggal').append('<option value=' + data[i].id + '>' + data[i].nama + '</option>');
-                    }
-                }
+            $.get('/get-provinsi', function(data) {
+                $('#provinsi-tinggal').empty().append('<option value="">Pilih Provinsi</option>');
+                data.forEach(function(item) {
+                    $('#provinsi-tinggal').append('<option value="' + item.id + '">' + item.nama + '</option>');
+                });
             });
 
             $('#provinsi-tinggal').change(function () {
-                alamatTinggal.idProvinsi = $(this).find(":selected").val();
-                $('input[name ="prov_tinggal"]').val($(this).find(":selected").text());
-                $.ajax({
-                    type: 'GET',
-                    url: 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' + alamatTinggal.idProvinsi,
-                    success: function (data) {
-                        $('#kota-tinggal').empty();
-                        data = data.kota_kabupaten;
-                        for (let i = 0; i < data.length; i++) {
-                            $('#kota-tinggal').append('<option value=' + data[i].id + '>' + data[i].nama + '</option>');
-                        }
-                    }
-                });
+                let provinsiId = $(this).val();
+                $('#kota-tinggal').empty().append('<option value="">Pilih Kota/Kabupaten</option>');
+                $('#kec-tinggal').empty().append('<option value="">Pilih Kecamatan</option>');
+                $('#kel-tinggal').empty().append('<option value="">Pilih Kelurahan/Desa</option>');
+                if(provinsiId) {
+                    $.get('/get-kota/' + provinsiId, function(data) {
+                        let html = '<option value="">Pilih Kota/Kabupaten</option>';
+                        data.forEach(function(item) {
+                            html += '<option value="' + item.id + '">' + item.nama + '</option>';
+                        });
+                        $('#kota-tinggal').html(html);
+                    });
+                }
             });
 
             $('#kota-tinggal').change(function () {
-                alamatTinggal.idKota = $(this).find(":selected").val();
-                $('input[name ="kota_tinggal"]').val($(this).find(":selected").text());
-                $.ajax({
-                    type: 'GET',
-                    url: 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=' + alamatTinggal.idKota,
-                    success: function (data) {
-                        $('#kec-tinggal').empty();
-                        data = data.kecamatan;
-                        for (let i = 0; i < data.length; i++) {
-                            $('#kec-tinggal').append('<option value=' + data[i].id + '>' + data[i].nama + '</option>');
-                        }
-                    }
-                });
+                let kotaId = $(this).val();
+                $('#kec-tinggal').empty().append('<option value="">Pilih Kecamatan</option>');
+                $('#kel-tinggal').empty().append('<option value="">Pilih Kelurahan/Desa</option>');
+                if(kotaId) {
+                    $.get('/get-kecamatan/' + kotaId, function(data) {
+                        let html = '<option value="">Pilih Kecamatan</option>';
+                        data.forEach(function(item) {
+                            html += '<option value="' + item.id + '">' + item.nama + '</option>';
+                        });
+                        $('#kec-tinggal').html(html);
+                    });
+                }
             });
 
             $('#kec-tinggal').change(function () {
-                alamatTinggal.idKec = $(this).find(":selected").val();
-                $('input[name ="kec_tinggal"]').val($(this).find(":selected").text());
-                $.ajax({
-                    type: 'GET',
-                    url: 'https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=' + alamatTinggal.idKec,
-                    success: function (data) {
-                        $('#kel-tinggal').empty();
-                        data = data.kelurahan;
-                        for (let i = 0; i < data.length; i++) {
-                            $('#kel-tinggal').append('<option value=' + data[i].id + '>' + data[i].nama + '</option>');
-                        }
-                    }
-                });
+                let kecamatanId = $(this).val();
+                $('#kel-tinggal').empty().append('<option value="">Pilih Kelurahan/Desa</option>');
+                if(kecamatanId) {
+                    $.get('/get-kelurahan/' + kecamatanId, function(data) {
+                        let html = '<option value="">Pilih Kelurahan/Desa</option>';
+                        data.forEach(function(item) {
+                            html += '<option value="' + item.id + '">' + item.nama + '</option>';
+                        });
+                        $('#kel-tinggal').html(html);
+                    });
+                }
             });
-
-            $('#kel-tinggal').change(function () {
-                $('input[name ="kel_tinggal"]').val($(this).find(":selected").text());
-            });
-
         });
 
 

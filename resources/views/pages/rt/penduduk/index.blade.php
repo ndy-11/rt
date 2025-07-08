@@ -8,17 +8,22 @@ RT - Data Penduduk
 <link href="{{asset('assets/plugins/data-tables/responsive.datatables.min.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2-boostrap.min.css')}}">
+<style>
+    .table-lg-font {
+        font-size: 1.1rem; /* Atur ukuran font sesuai kebutuhan */
+    }
+</style>
 @endpush
 @section('content')
 <div class="breadcrumb-wrapper">
     <h1>Data Warga</h1>
 </div>
 <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-12">
+ <div class="col-lg-3 col-md-4 col-sm-12">
         <div class="card bg-primary card-default">
             <div class="card-body text-white">
                 <h5 class="card-title">Jumlah Warga</h5>
-                <span class="h2 mt-2">{{$jmlh_penduduk ?? ''}}</span>
+                <span class="h2 mt-2">{{$jmlh_penduduk}}</span>
             </div>
         </div>
     </div>
@@ -37,14 +42,14 @@ RT - Data Penduduk
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-12 col-md-6 col-sm-6 mb-4 text-center" >
+                    <div class="col-lg-6 col-md-6 col-sm-12 mb-4 text-center" >
                         <h5 class="mt-2 mb-4">Jenis Kelamin</h5>
-                        <canvas id="jkel-chart" style="height: 450px; width:100% !important; max-width: 100%"></canvas>
+                        <canvas id="jkel-chart"></canvas>
                     </div>
-                   <!-- <div class="col-lg-6 col-md-6 col-sm-12 mb-4 text-center">
+                   <div class="col-lg-6 col-md-6 col-sm-12 mb-4 text-center">
                         <h5 class="mt-2 mb-4">Pekerjaan</h5>
                         <canvas id="pekerjaan-chart"></canvas>
-                    </div> -->
+                    </div> 
                 </div>
             </div>
         </div>
@@ -53,11 +58,15 @@ RT - Data Penduduk
     <div class="card card-default">
         <div class="card-header card-header-border-bottom d-flex justify-content-between mb-4">
             <h2>Data Warga</h2>
+             <div>
+                    <a href="/rt/penduduk/create" target="" class="btn btn-outline-primary text-uppercase">
+                        <i class="fas fa-plus-circle mr-2"></i> Tambah Data Warga
+                    </a>
+                </div>
         </div>
         <div class="card-body">
-
             {{-- Filter Tanggal --}}
-            <form method="GET" action="{{ route('pages.rt.penduduk.index') }}" class="form-inline mb-3">
+            <form method="GET" action="{{ route('rt.penduduk.index') }}" class="form-inline mb-3">
                 <div class="form-group mr-2">
                     <label for="tanggal_mulai" class="mr-2">Dari</label>
                     <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="form-control"
@@ -69,8 +78,8 @@ RT - Data Penduduk
                            value="{{ request('tanggal_selesai') }}">
                 </div>
                 <button type="submit" class="btn btn-primary">Filter</button>
+                <a href="{{ route('rt.penduduk.index') }}" class="btn btn-secondary ml-2">Reset</a>
             </form>
-
             {{-- Tombol Export --}}
             <div class="mb-2">
             <a href="{{ route('pages.rt.export.excel', [
@@ -94,18 +103,19 @@ RT - Data Penduduk
 </a>
 
             </div>
-
             {{-- Tabel Data --}}
             <div class="responsive-data-table">
-                <table class="table dt-responsive nowrap data-table" style="width:100%">
+                <table class="table dt-responsive nowrap data-table table-lg-font" style="width:100%; font-size: 1rem;">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama Lengkap</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Alamat</th>
-                            <th>Status</th>
-                            <th></th>
+                            <th style="font-size:1.1rem;">No</th>
+                            <th style="font-size:1.1rem;">NIK</th>
+                            <th style="font-size:1.1rem;">Nomor KK</th>
+                            <th style="font-size:1.1rem;">Nama Lengkap</th>
+                            <th style="font-size:1.1rem;">Jenis Kelamin</th>
+                            <th style="font-size:1.1rem;">Alamat</th>
+                            <th style="font-size:1.1rem;">Status</th>
+                            <th style="font-size:1.1rem;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,11 +124,21 @@ RT - Data Penduduk
                                 @if(is_object($val))
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
+                                        <td>{{ $val->nik }}</td>
+                                        <td>{{ $val->no_kk }}</td>
                                         <td>{{ $val->nama }}</td>
                                         <td>{{ $val->jkel }}</td>
                                         <td>{{ $val->alamat }}</td>
                                         <td>{{ $val->status }}</td>
-                                        <td><a class="btn btn-sm btn-primary" href="/rt/penduduk/{{ $val->id }}">Detail</a></td>
+                                        <td>
+                                            <a class="btn btn-sm btn-primary" href="/rt/penduduk/{{ $val->id }}">Detail</a>
+                                            <a class="btn btn-sm btn-warning text-white" href="{{ route('rt.penduduk.edit', $val->id) }}">Edit</a>
+                                              <form action="{{ route('rt.penduduk.destroy', $val->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm text-white btn-danger">Hapus</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endif
                             @endforeach
@@ -176,9 +196,16 @@ RT - Data Penduduk
 <script src="{{asset('assets/plugins/data-tables/datatables.responsive.min.js')}}"></script>
 <script>
    $(document).ready(function() {
-        $('.data-table').DataTable();
+        // Hanya inisialisasi DataTable sekali saja, tanpa destroy
+        if (!$.fn.DataTable.isDataTable('.data-table')) {
+            $('.data-table').DataTable({
+                "lengthMenu": [ [10, 25, 50, 100], [10, 25, 50, 100] ],
+                "pageLength": 10,
+                 "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
+            });
+        }
 
-        /*let pekerjaan = <?= json_encode($pekerjaan); ?>;
+        let pekerjaan = <?= json_encode($pekerjaan); ?>;
         let nama_pekerjaan = [];
         let jmlh_pekerjaan = [];
         pekerjaan.forEach(el => {
@@ -205,7 +232,7 @@ RT - Data Penduduk
                     }
                 }
             }
-        });*/
+        });
 
         new Chart(document.getElementById("jkel-chart"), {
             type: 'pie',
@@ -230,6 +257,6 @@ RT - Data Penduduk
                 }
             }
         });
-    });
+   });
 </script>
 @endpush

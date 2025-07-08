@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExportPendudukController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\WargaExport;
-use App\Http\Controllers\RT\WilayahController;
+use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\RW\PendudukController as RWPendudukController;
 use App\Http\Controllers\RT\PendudukController as RTPendudukController;
+use App\http\Controller\RT\GrafikController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,12 +42,6 @@ Route::get('/get-kelurahan/{kecamatanId}', [WilayahController::class, 'getKelura
 Route::get('/get-rt', [WilayahController::class, 'getRT']);
 Route::get('/get-rw', [WilayahController::class, 'getRW']);
 
-// Define routes for RW
-Route::get('rw/penduduk', [RWPendudukController::class, 'index'])->name('rw.penduduk.index');
-
-// Define routes for RT
-Route::get('rt/penduduk', [RTPendudukController::class, 'index'])->name('pages.rt.penduduk.index');
-
 // Export routes for RW
 Route::prefix('rw')->name('pages.rw.')->group(function () {
     Route::get('/export/excel', [ExportPendudukController::class, 'exportExcel'])->name('export.excel');
@@ -59,4 +54,9 @@ Route::prefix('rt')->name('pages.rt.')->middleware(['auth', 'rt', 'warga'])->gro
     Route::get('/export/pdf', [ExportPendudukController::class, 'exportPDF'])->name('export.pdf');
 });
 
-
+Route::delete('/rw/penduduk/{id}', [RWPendudukController::class, 'destroy'])->name('rw.penduduk.destroy');
+Route::delete('/rt/penduduk/{id}', [RTPendudukController::class, 'destroy'])->name('rt.penduduk.destroy');
+Route::get('/penduduk/{id}/edit', [RTPendudukController::class, 'edit'])->name('pages.rt.penduduk.edit');
+Route::get('/penduduk/{id}/edit', [RWPendudukController::class, 'edit'])->name('pages.rw.penduduk.edit');
+Route::put('/penduduk/{id}', [RWPendudukController::class, 'update'])->name('pages.rw.penduduk.update');
+Route::put('/penduduk/{id}', [RTPendudukController::class, 'update'])->name('pages.rt.penduduk.update');

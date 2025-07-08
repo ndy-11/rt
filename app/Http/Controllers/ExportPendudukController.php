@@ -8,11 +8,12 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\WargaExport;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Illuminate\Support\Facades\DB;
 
 class ExportPendudukController extends Controller
 {
     // Export ke Excel
-    public function exportExcel(Request $request)
+      public function exportExcel(Request $request)
     {
         $query = Warga::query();
 
@@ -31,10 +32,35 @@ class ExportPendudukController extends Controller
             $query->whereBetween('created_at', [$start, $end]);
         }
 
-        $warga = $query->get();
+        // Ambil data lengkap
+        $data = $query->select(
+            'no_rw',
+            'no_rt',
+            DB::raw('MONTH(created_at) as bulan'),
+            'no_kk',
+            'nik',
+            'nama',
+            'jkel',
+            'alamat'
+        )
+        ->orderBy('no_rw', 'ASC')
+        ->orderBy('no_rt', 'ASC')
+        ->orderBy(DB::raw('MONTH(created_at)'), 'ASC')
+        ->get();
 
-        return Excel::download(new WargaExport($warga, $request->all()), 'data_warga.xlsx');
+        // Pilih view sesuai kebutuhan
+        if ($request->filled('rw')) {
+            $view = 'pages.rw.export.excel';
+        } elseif ($request->filled('rt')) {
+            $view = 'pages.rt.export.excel';
+        } else {
+            $view = 'exports.warga';
+        }
+
+        // Kirim data ke export, bukan request array
+        return Excel::download(new \App\Exports\WargaExport($data, $view), 'data_warga.xlsx');
     }
+
 
     // Export ke PDF dan langsung unduh
     public function exportPDF(Request $request)
@@ -72,14 +98,23 @@ class ExportPendudukController extends Controller
             return $item->no_rw . '|' . $item->no_rt . '|' . $item->created_at->format('Y-m');
         })->map(function ($group) {
             $first = $group->first();
+            // Ambil dari field jkel jika ada, jika tidak dari jenis_kelamin, lalu normalisasi
+            $jkel = $first->jkel ?? $first->jenis_kelamin ?? '';
+            if ($jkel === 'L' || strtolower($jkel) === 'laki-laki') {
+                $jkel = 'Laki-laki';
+            } elseif ($jkel === 'P' || strtolower($jkel) === 'perempuan') {
+                $jkel = 'Perempuan';
+            }
             return (object)[
                 'rw'        => $first->no_rw,
                 'rt'        => $first->no_rt,
                 'bulan'     => $first->created_at->translatedFormat('F'),
                 'bulan_num' => $first->created_at->format('m'),
-                'l'         => $group->where('jkel', 'L')->count(),
-                'p'         => $group->where('jkel', 'P')->count(),
-                'jumlah'    => $group->count(),
+                'no_kk'     => $first->no_kk,
+                'nik'       => $first->nik,
+                'nama'      => $first->nama,
+                'jkel'      => $jkel,
+                'alamat'    => $first->alamat,
             ];
         })->sortBy(function ($item) {
             return $item->rw . '-' . $item->rt . '-' . $item->bulan_num;

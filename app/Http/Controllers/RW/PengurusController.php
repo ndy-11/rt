@@ -80,7 +80,24 @@ class PengurusController extends Controller
      */
     public function show($id)
     {
-        //
+        $bagian = Bagian::find($id);
+
+        if ($bagian->id == 1) {
+            // Tampilkan hanya user yang bertipe RW dan id_bagian = 1
+            $pengurus = User::where('id_bagian', 1)
+                ->where('tipe', 'RW')
+                ->get();
+        } else {
+            // Tampilkan hanya user yang bertipe RT dan id_bagian = $bagian->id
+            $pengurus = User::where('id_bagian', $bagian->id)
+                ->where('tipe', 'RT')
+                ->get();
+        }
+
+        return view('pages.rw.bagian.show', [
+            'bagian' => $bagian,
+            'pengurus' => $pengurus,
+        ]);
     }
 
     /**
@@ -114,6 +131,15 @@ class PengurusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Pastikan $id yang diterima adalah id user pengurus yang ingin dihapus
+        $user = User::find($id);
+        if ($user) {
+            $user->tipe = "Warga";
+            if ($user->warga && $user->warga->id_bagian) {
+                $user->id_bagian = $user->warga->id_bagian;
+            }
+            $user->save();
+        }
+        return redirect()->back()->with('success', 'Pengurus berhasil dihapus.');
     }
 }

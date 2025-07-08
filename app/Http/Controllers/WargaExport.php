@@ -9,40 +9,21 @@ use Carbon\Carbon;
 
 class WargaExport implements FromView
 {
-    protected $start;
-    protected $end;
+    protected $data;
+    protected $view;
 
-    public function __construct($start, $end)
+    // Ubah konstruktor agar menerima data dan nama view, bukan start/end
+    public function __construct($data, $view)
     {
-        $this->start = $start;
-        $this->end = $end;
+        $this->data = $data;
+        $this->view = $view;
     }
 
     public function view(): View
     {
-        $query = DB::table('warga')
-            ->select(
-                'no_rw',
-                'no_rt',
-                DB::raw('MONTH(created_at) as bulan'),
-                DB::raw("SUM(CASE WHEN jkel = 'L' THEN 1 ELSE 0 END) as laki"),
-                DB::raw("SUM(CASE WHEN jkel = 'P' THEN 1 ELSE 0 END) as perempuan")
-            );
-
-        if ($this->start && $this->end) {
-            $query->whereBetween('created_at', [
-                Carbon::parse($this->start)->startOfDay(),
-                Carbon::parse($this->end)->endOfDay()
-            ]);
-        }
-
-        $data = $query
-            ->groupBy('no_rw', 'no_rt', DB::raw('MONTH(created_at)'))
-            ->orderBy('no_rw', 'ASC')
-            ->orderBy('no_rt', 'ASC')
-            ->orderBy(DB::raw('MONTH(created_at)'), 'ASC')
-            ->get();
-
-        return view('pages.rw.export.excel', compact('data'));
+        // Kirim data langsung ke view
+        return view($this->view, [
+            'data' => $this->data
+        ]);
     }
 }

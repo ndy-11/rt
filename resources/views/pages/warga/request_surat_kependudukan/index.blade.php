@@ -63,13 +63,19 @@ Warga - Request
 <script src="{{asset('assets/plugins/data-tables/datatables.responsive.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-        $('.data-table').DataTable({
-            "aLengthMenu": [
-                [20, 30, 50, 75, -1],
-                [20, 30, 50, 75, "All"]
-            ],
-            "pageLength": 20,
-            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
+        // Cegah duplikasi inisialisasi DataTable pada semua tabel .data-table
+        $('.data-table').each(function() {
+            if ($.fn.DataTable.isDataTable(this)) {
+                $(this).DataTable().destroy();
+            }
+            $(this).DataTable({
+                "aLengthMenu": [
+                    [20, 30, 50, 75, -1],
+                    [20, 30, 50, 75, "All"]
+                ],
+                "pageLength": 20,
+                "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
+            });
         });
     });
 </script>

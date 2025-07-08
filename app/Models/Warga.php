@@ -23,6 +23,10 @@ class Warga extends Model
         'no_kk',
         'no_rt',
         'no_rw',
+        'prov_ktp',
+        'kota_ktp',
+        'kec_ktp',
+        'kel_ktp',
         'agama',
         'pendidikan',
         'pekerjaan',
@@ -30,6 +34,11 @@ class Warga extends Model
         'kedudukan_keluarga',
         'alamat',
         'alamat_ktp',
+        'prov_tinggal',
+        'kota_tinggal',
+        'kec_tinggal',
+        'kel_tinggal',
+        'alamat_tinggal',
         'keterangan'
     ];
 
@@ -107,4 +116,24 @@ class Warga extends Model
     {
         return $this->hasMany(RequestSuratKependudukan::class, 'id_bagian', 'id_bagian');
     }
+    public function provinsi()
+{
+    return $this->belongsTo(Provinsi::class, 'prov_ktp');
+}
+
+public function kota()
+{
+    return $this->belongsTo(Kota::class, 'kota_ktp');
+}
+
+public function kecamatan()
+{
+    return $this->belongsTo(Kecamatan::class, 'kec_ktp');
+}
+
+public function kelurahan()
+{
+    return $this->belongsTo(Kelurahan::class, 'kel_ktp');
+}
+
 }

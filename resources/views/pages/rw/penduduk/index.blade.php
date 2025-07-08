@@ -14,16 +14,16 @@ RW - Data Penduduk
     <h1>Data Penduduk</h1>
 </div>
 <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-12">
+    <div class="col-12">
         <div class="card card-default ">
             <div class="card-header card-header-border-bottom">
                 <h2>Filter RT</h2>
             </div>
             <div class="card-body">
             <form method="get" action="{{ route('rw.penduduk.index') }}">
-                <div class="row mb-4">
+                <div class="form-row mb-4">
                     <!-- Filter RT -->
-                    <div class="col-md-3">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
                         <label for="rts">Pilih RT</label>
                         <select class="form-control" id="rts" name="rts">
                             <option value="">Pilih RT</option>
@@ -33,7 +33,7 @@ RW - Data Penduduk
                         </select>
                     </div>
                     <!-- Filter RW -->
-                    <div class="col-md-3">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
                         <label for="rw">Pilih RW</label>
                         <select class="form-control" name="rw">
                             <option value="">Pilih RW</option>
@@ -43,18 +43,19 @@ RW - Data Penduduk
                         </select>
                     </div>
                     <!-- Filter Tanggal Mulai -->
-                    <div class="col-md-2">
+                    <div class="col-lg-2 col-md-6 col-sm-12 mb-2">
                         <label for="tanggal_mulai">Tanggal Mulai</label>
                         <input type="date" id="tanggal_mulai" name="tanggal_mulai" class="form-control" value="{{ request('tanggal_mulai') }}">
                     </div>
                     <!-- Filter Tanggal Selesai -->
-                    <div class="col-md-2">
+                    <div class="col-lg-2 col-md-6 col-sm-12 mb-2">
                         <label for="tanggal_selesai">Tanggal Selesai</label>
                         <input type="date" id="tanggal_selesai" name="tanggal_selesai" class="form-control" value="{{ request('tanggal_selesai') }}">
                     </div>
-                    <!-- Button Cari -->
-                    <div class="col-md-2 d-flex align-items-end">
-                        <button id="cari-penduduk" type="submit" class="btn btn-primary w-100">Cari</button>
+                    <!-- Button Cari & Reset -->
+                    <div class="col-12 d-flex align-items-end mb-2 mt-2">
+                        <button id="cari-penduduk" type="submit" class="btn btn-primary mr-2">Cari</button>
+                        <a href="{{ route('rw.penduduk.index') }}" class="btn btn-secondary ml-2">Reset</a>
                     </div>
                 </div>
             </form>
@@ -87,21 +88,34 @@ RW - Data Penduduk
                     <div class="container">
                         <div class="row justify-content-center">
                             <!-- Persebaran Penduduk -->
-                            <div class="col-lg-5 col-md-6 col-sm-12 mb-4" style="margin-right: 50px;">
-                                <div class="text-center mb-2">
-                                    <label class="fw-bold">Persebaran Penduduk</label>
-                                </div>
-                                <div style="position: relative;height: 450px; width:100%; max-width: 100%">
-                                    <canvas id="persebaran-chart"></canvas>
+                            <div class="col-lg-8 col-md-10 col-sm-12 mb-4">
+                                <div class="text-center">
+                                    <label class="fw-bold mb-2">Persebaran Penduduk</label>
+                                    <div style="position: relative; height: 480px; width:100%; max-width: 100%">
+                                        <canvas id="persebaran-chart"></canvas>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row justify-content-center">
                             <!-- Jenis Kelamin -->
-                            <div class="col-lg-5 col-md-6 col-sm-12 mb-4" style="margin-left: 50px;">
-                                <div class="text-center mb-2">
-                                    <label class="fw-bold">Jenis Kelamin</label>
+                            <div class="col-lg-5 col-md-6 col-sm-12 mb-4">
+                                <div class="text-center">
+                                    <label class="fw-bold mb-2">Jenis Kelamin</label>
+                                    <div style="position: relative; height: 450px; width:100%; max-width: 100%">
+                                        <canvas id="jkel-chart"></canvas>
+                                    </div>
                                 </div>
-                                <div style="position: relative;height: 400px; width:100%; max-width: 100%; margin-top: 10px">
-                                    <canvas id="jkel-chart"></canvas>
+                            </div>
+                            <!-- Spacer -->
+                            <div class="col-lg-1 d-none d-lg-block"></div>
+                            <!-- Chart Pekerjaan -->
+                            <div class="col-lg-5 col-md-6 col-sm-12 mb-4">
+                                <div class="text-center">
+                                    <label class="fw-bold mb-2">Pekerjaan</label>
+                                    <div style="position: relative; height: 480px; width:100%; max-width: 100%">
+                                        <canvas id="pekerjaan-chart"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -125,28 +139,32 @@ RW - Data Penduduk
                     </a>
                 </div>
                 <div class="responsive-data-table">
-                    <table class="table dt-responsive nowrap data-table" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Lengkap</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Alamat</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+                    <table class="table dt-responsive nowrap data-table" style="width:100%; font-size: 1rem;">
+                    <thead>
+                        <tr>
+                            <th style="font-size:1.1rem;">No</th>
+                            <th style="font-size:1.1rem;">NIK</th>
+                            <th style="font-size:1.1rem;">Nomor KK</th>
+                            <th style="font-size:1.1rem;">Nama Lengkap</th>
+                            <th style="font-size:1.1rem;">Jenis Kelamin</th>
+                            <th style="font-size:1.1rem;">Alamat</th>
+                            <th style="font-size:1.1rem;">Status</th>
+                            <th style="font-size:1.1rem;">Aksi</th>
+                        </tr>
+                    </thead>
                         <tbody>
                             @php $no = 1; @endphp
                             @foreach($list_warga as $val)
                             <tr>
                                 <td>{{$no}}</td>
+                                <td>{{$val['nik']}}</td>
+                                <td>{{$val['no_kk']}}</td>
                                 <td>{{$val['nama']}}</td>
                                 <td>{{$val['jkel']}}</td>
                                 <td>{{$val['alamat']}}</td>
                                 <td>{{$val['status']}}</td>
                                 <td>
-                                    <a class="btn btn-sm text-white btn-primary" href="/rw/penduduk/{{$val['id']}}">Detail</a>
+                                    <a class="btn btn-sm text-white btn-primary" href="/rw/penduduk/{{$val['id']}}">Detail</a>   
                                 </td>
                             </tr>
                             @php $no++; @endphp
@@ -196,30 +214,68 @@ RW - Data Penduduk
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   $(document).ready(function() {
-    $('.data-table').DataTable();
-    function applyFilter() {
-        // Ambil nilai tanggal mulai dan tanggal akhir dari input
-        const startDate = document.getElementById('startDate').value;
-        const endDate = document.getElementById('endDate').value;
+            // Hanya inisialisasi DataTable sekali saja, tanpa destroy
+        if (!$.fn.DataTable.isDataTable('.data-table')) {
+            $('.data-table').DataTable({
+                "lengthMenu": [ [10, 25, 50, 100], [10, 25, 50, 100] ],
+                "pageLength": 10,
+                 "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
+                  });
+        }
+    // Color palette for charts
+    const colorPalette = [
+        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
+        '#FF9F40', '#C9CBCF', '#F7464A', '#46BFBD', '#FDB45C',
+        '#B3E283', '#F7B7A3', '#A3A1F7', '#F7E6A3', '#A3F7D1'
+    ];
 
-        // Kirimkan data tanggal ke controller menggunakan fetch
-        fetch(`/grafik-persebaran?start_date=${startDate}&end_date=${endDate}`)
-            .then(response => response.json())
-            .then(data => {
-                // Update chart dengan data yang difilter
-                updateChart(data);
-            })
-            .catch(error => console.error('Error:', error));
+    // Data Jenis Perkerjaan
+    let pekerjaan = <?= isset($pekerjaan) ? json_encode($pekerjaan) : '[]'; ?>;
+    let nama_pekerjaan = [];
+    let jmlh_pekerjaan = [];
+    pekerjaan.forEach(el => {
+        nama_pekerjaan.push(el.pekerjaan);
+        jmlh_pekerjaan.push(el.total);
+    });
+
+    if (window.pekerjaanChart) {
+        window.pekerjaanChart.destroy();
     }
-    // Hancurkan chart lama jika ada
+    window.pekerjaanChart = new Chart(document.getElementById("pekerjaan-chart"), {
+        type: 'pie',
+        data: {
+            labels: nama_pekerjaan,
+            datasets: [{
+                label: "Orang",
+                data: jmlh_pekerjaan,
+                backgroundColor: colorPalette,
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 20 // Tampilkan kotak warna legend
+                    }
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    // Data Jenis Kelamin
     if (window.jkelChart) {
         window.jkelChart.destroy();
     }
-
-    // Data Jenis Kelamin
-    let jkel = <?= json_encode($jkel ?? []); ?>;
+    let jkel = <?= isset($jkel) ? json_encode($jkel) : '[]'; ?>;
     let nama_jkel = [];
     let jmlh_jkel = [];
+    let warna_jkel = ['#36A2EB', '#FF6384'];
     jkel.forEach(el => {
         nama_jkel.push(el.jkel === "L" ? "Laki-Laki" : "Perempuan");
         jmlh_jkel.push(el.total);
@@ -232,73 +288,68 @@ RW - Data Penduduk
             datasets: [{
                 label: "Jenis Kelamin (orang)",
                 data: jmlh_jkel,
-                backgroundColor: ['#36A2EB', '#FF6384'],
+                backgroundColor: warna_jkel,
                 borderColor: '#fff',
                 borderWidth: 2
             }]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    position: 'bottom'
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 20 // Tampilkan kotak warna legend
+                    }
                 }
-            }
+            },
+            responsive: true,
+            maintainAspectRatio: false
         }
     });
-let persebaran = <?= json_encode($persebaran ?? []); ?>;
-let nama_bagian = [];
-let jmlh_warga = [];
-let backgroundColors = [];
 
-// Define multiple colors for the chart (more colors for variety)
-let colorPalette = [
-    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-    '#FF9F40', '#C9CBCF', '#F7464A', '#46BFBD', '#FDB45C'
-];
-
-// Keep all RT entries, including those with zero population
-persebaran.forEach((el, index) => {
-    nama_bagian.push(el.nama_bagian);
-    jmlh_warga.push(el.jmlh_warga);
-    
-    // Set a grey color for zero population
-    if (el.jmlh_warga === 0) {
-        backgroundColors.push('#D3D3D3');  // Grey for zero population
-    } else {
-        // Cycle through available colors for non-zero population
-        backgroundColors.push(colorPalette[index % colorPalette.length]);  // Cycle through the color palette
-    }
-});
-
-// Destroy old chart if exists
-if (window.persebaranChart) {
-    window.persebaranChart.destroy();
-}
-
-// Create the new chart
-window.persebaranChart = new Chart(document.getElementById("persebaran-chart"), {
-    type: 'pie',
-    data: {
-        labels: nama_bagian,
-        datasets: [{
-            label: "Jumlah Warga",
-            data: jmlh_warga,
-            backgroundColor: backgroundColors,  // Use the background colors array
-            borderColor: '#ffffff',
-            borderWidth: 2
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'bottom'
-            }
+    // Persebaran Penduduk
+    let persebaran = <?= json_encode($persebaran ?? []); ?>;
+    let nama_bagian = [];
+    let jmlh_warga = [];
+    let backgroundColors = [];
+    persebaran.forEach((el, index) => {
+        nama_bagian.push(el.nama_bagian);
+        jmlh_warga.push(el.jmlh_warga);
+        if (el.jmlh_warga === 0) {
+            backgroundColors.push('#D3D3D3');
+        } else {
+            backgroundColors.push(colorPalette[index % colorPalette.length]);
         }
+    });
+    if (window.persebaranChart) {
+        window.persebaranChart.destroy();
     }
+    window.persebaranChart = new Chart(document.getElementById("persebaran-chart"), {
+        type: 'pie',
+        data: {
+            labels: nama_bagian,
+            datasets: [{
+                label: "Jumlah Warga",
+                data: jmlh_warga,
+                backgroundColor: backgroundColors,
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 20 // Tampilkan kotak warna legend
+                    }
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        }
     });
 });
 </script>

@@ -121,7 +121,24 @@ RW - Data Pengumuman
 <script src="{{asset('assets/plugins/data-tables/datatables.responsive.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-        $('.data-table').DataTable();
+        $('.data-table').each(function() {
+            if ($.fn.DataTable.isDataTable(this)) {
+                $(this).DataTable().destroy();
+            }
+            $(this).DataTable({
+                "responsive": true,
+                "aLengthMenu": [
+                    [20, 30, 50, 75, -1],
+                    [20, 30, 50, 75, "All"]
+                ],
+                "pageLength": 20,
+                "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
+        });
     });
 </script>
 @endpush

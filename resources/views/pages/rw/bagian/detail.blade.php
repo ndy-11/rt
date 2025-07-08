@@ -45,7 +45,7 @@ RW - Detail Bagian
                     <i class="mdi mdi-trash-can"></i>
                     Hapus
                 </button> -->
-                <a class="btn btn-primary btn-pill text-white" href="/rw/pengurus/create?id_bagian={{$bagian->id}}">
+                <a class="btn btn-primary btn-pill text-white" href="{{ route('rw.pengurus.create', ['id_bagian' => $bagian->id]) }}">
                     <i class="mdi mdi-add"></i>
                     Tambah Pengurus
                 </a>
@@ -66,9 +66,12 @@ RW - Detail Bagian
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Alamat</th>
+                                <th>NIK</th>
+                                <th>Nomor KK</th>
+                                <th>Nama Lengkap</th>
                                 <th>Jenis Kelamin</th>
+                                <th>Alamat</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -77,9 +80,12 @@ RW - Detail Bagian
                             @foreach($pengurus as $val)
                             <tr>
                                 <td>{{$no}}</td>
-                                <td>{{$val->warga->nama}}</td>
-                                <td>{{$val->warga->alamat}}</td>
-                                <td>{{$val->warga->jkel}}</td>
+                                <td>{{$val->warga->nik ?? '-'}}</td>
+                                <td>{{$val->warga->no_kk ?? '-'}}</td>
+                                <td>{{$val->warga->nama ?? '-'}}</td>
+                                <td>{{$val->warga->jkel ?? '-'}}</td>
+                                <td>{{$val->warga->alamat ?? '-'}}</td>
+                                <td>{{$val->warga->status_kawin ?? '-'}}</td>
                                 <td>
                                     <button class="btn btn-danger btn-pill text-white" data-toggle="modal" data-target="#deleteModal">
                                         <i class="mdi mdi-trash-can"></i>

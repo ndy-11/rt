@@ -32,6 +32,25 @@ class BagianSeeder extends Seeder
             [
                 "nama_bagian" => "RW 005",
                 "tipe_bagian" => "RW"
+            ],           [
+                "nama_bagian" => "RW 006",
+                "tipe_bagian" => "RW"
+            ],
+            [
+                "nama_bagian" => "RW 007",
+                "tipe_bagian" => "RW"
+            ],
+            [
+                "nama_bagian" => "RW 008",
+                "tipe_bagian" => "RW"
+            ],
+            [
+                "nama_bagian" => "RW 009",
+                "tipe_bagian" => "RW"
+            ],
+            [
+                "nama_bagian" => "RW 010",
+                "tipe_bagian" => "RW"
             ],
             [
                 "nama_bagian" => "RT 001",

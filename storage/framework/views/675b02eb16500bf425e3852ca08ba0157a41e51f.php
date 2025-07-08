@@ -22,7 +22,7 @@
             <span class="nav-text">Penduduk</span>
         </a>
     </li>
-   <!-- <li class="has-sub <?php echo e(request()->is('rw/inventaris*') ? 'active' : ''); ?>">
+   <li class="has-sub <?php echo e(request()->is('rw/inventaris*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rw/inventaris">
             <i class="mdi mdi-archive"></i>
             <span class="nav-text">Inventaris</span>
@@ -39,19 +39,19 @@
             <i class="mdi mdi-email-outline"></i>
             <span class="nav-text">Register</span>
         </a>
-    </li> -->
+    </li>
     <li class="has-sub <?php echo e(request()->is('rw/pengumuman*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rw/pengumuman">
             <i class="mdi mdi-message-alert-outline"></i>
             <span class="nav-text">Pengumuman</span>
         </a>
     </li>
-    <!-- <li class="has-sub <?php echo e(request()->is('rw/pemilu*') ? 'active' : ''); ?>">
+    <li class="has-sub <?php echo e(request()->is('rw/pemilu*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rw/pemilu">
             <i class="mdi mdi-vote"></i>
             <span class="nav-text">Pemilu</span>
         </a>
-    </li> -->
+    </li>
     <li class="has-sub <?php echo e(request()->is('rw/rapat*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rw/rapat">
             <i class="mdi mdi-timetable"></i>
@@ -59,11 +59,8 @@
         </a>
     </li>
     <?php else: ?>
-    <p>Tipe not available</p>
+    <!--- <p>Tipe not available</p> -->
     <?php endif; ?>
-
-
-
     <!-- RT MENU -->
     <?php if(isset(Auth::user()->tipe) && Auth::user()->tipe == 'RT'): ?>
     <li>
@@ -75,13 +72,31 @@
             <span class="nav-text">Dashboard</span>
         </a>
     </li>
-    <li class="has-sub <?php echo e(request()->is('rt/penduduk*') || request()->is('rt/mutasi*') ? 'active' : ''); ?>">
+    <li class="has-sub <?php echo e(request()->is('rt/grafik*') ? 'active' : ''); ?>">
+        <a class="sidenav-item-link" href="/rt/grafik">
+            <i class="mdi mdi-account-box-multiple"></i>
+            <span class="nav-text">Grafik</span>
+        </a>
+    </li>
+        <li class="has-sub <?php echo e(request()->is('rt/tambah_warga*') ? 'active' : ''); ?>">
+        <a class="sidenav-item-link" href="/rt/tambah_warga/create">
+            <i class="mdi mdi-account-box-multiple"></i>
+            <span class="nav-text">Tambah Warga</span>
+        </a>
+    </li>
+        <li class="has-sub <?php echo e(request()->is('rt/master-data*') || request()->is('rt/mutasi*') ? 'active' : ''); ?>">
+        <a class="sidenav-item-link" href="/rt/master-data">
+            <i class="mdi mdi-account-box-multiple"></i>
+            <span class="nav-text">Master Data Warga</span>
+        </a>
+    </li>
+   <!--  <li class="has-sub <?php echo e(request()->is('rt/penduduk*') || request()->is('rt/mutasi*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rt/penduduk">
             <i class="mdi mdi-account-box-multiple"></i>
             <span class="nav-text">Penduduk</span>
         </a>
     </li>
-    <!-- <li class="has-sub <?php echo e(request()->is('rt/inventaris*') ? 'active' : ''); ?>">
+    <li class="has-sub <?php echo e(request()->is('rt/inventaris*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rt/inventaris">
             <i class="mdi mdi-archive"></i>
             <span class="nav-text">Inventaris</span>
@@ -104,40 +119,38 @@
             <i class="mdi mdi-email-plus-outline"></i>
             <span class="nav-text">Request Surat Kependudukan</span>
         </a>
-    </li> -->
+    </li>
     <li class="has-sub <?php echo e(request()->is('rt/pengumuman*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rt/pengumuman">
             <i class="mdi mdi-message-alert-outline"></i>
             <span class="nav-text">Pengumuman</span>
         </a>
     </li>
-   <!--  <li class="has-sub <?php echo e(request()->is('rt/pemilu*') ? 'active' : ''); ?>">
+   <li class="has-sub <?php echo e(request()->is('rt/pemilu*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rt/pemilu">
             <i class="mdi mdi-vote"></i>
             <span class="nav-text">Pemilu</span>
         </a>
-    </li> -->
+    </li>
     <li class="has-sub <?php echo e(request()->is('rt/rapat*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rt/rapat">
             <i class="mdi mdi-timetable"></i>
             <span class="nav-text">Rapat</span>
         </a>
     </li>
-    <!-- <li class="has-sub <?php echo e(request()->is('rt/aspirasi*') ? 'active' : ''); ?>">
+    <li class="has-sub <?php echo e(request()->is('rt/aspirasi*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/rt/aspirasi">
             <i class="mdi mdi-chat-processing"></i>
             <span class="nav-text">Aspirasi</span>
         </a>
     </li> -->
     <?php else: ?>
-    <p>Tipe not available</p>
+    <!--<p>Tipe not available</p> -->
     <?php endif; ?>
     <hr>
 
-
-
     <!-- Warga MENU -->
-    <li>
+   <!-- <li>
         <h6 class="px-4 py-2">Menu Warga</h6>
     </li>
     <li class="has-sub <?php echo e(request()->is('warga/pengumuman*') ? 'active' : ''); ?>">
@@ -146,7 +159,7 @@
             <span class="nav-text">Pengumuman</span>
         </a>
     </li>
-    <!-- <li class="has-sub <?php echo e(request()->is('warga/request*') ? 'active' : ''); ?>">
+    <li class="has-sub <?php echo e(request()->is('warga/request*') ? 'active' : ''); ?>">
         <a class="sidenav-item-link" href="/warga/request">
             <i class="mdi mdi-email-plus-outline"></i>
             <span class="nav-text">Request Surat Kependudukan</span>
